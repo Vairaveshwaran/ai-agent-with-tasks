@@ -1,55 +1,80 @@
-🚀 Overview
+🤖 AI Agent with Tasks
 
-This project is an AI Agent System built using LangChain, Autogen, PostgreSQL, and OpenAI’s GPT models. It allows users to ask natural language queries, process them intelligently, and store responses for future use. The system is designed to be modular, extendable, and production-ready.
+An intelligent AI Agent built using LangChain + OpenAI API + PostgreSQL + Docker, capable of:
 
-✅ Key Features
+Accepting user queries
 
-Conversational AI Agent
+Generating smart responses using GPT models
 
-Uses LangChain + OpenAI API to generate accurate and context-aware responses.
+Saving query–response pairs in a PostgreSQL database
 
-Works as a task-oriented assistant (e.g., summarization, Q&A, reasoning).
+(Future extension) Optionally sending results as PDF/Word via email
 
-Database Integration (PostgreSQL)
+✨ Features
 
-All queries and AI responses are stored in a structured database.
+🧠 AI-powered agent – Uses GPT via LangChain to answer queries.
 
-Enables history tracking, logging, and analytics on user queries.
+🗄️ Database logging – Every query and response is stored in PostgreSQL.
 
-Autonomous Tools
+🐳 Dockerized database – Easy setup with a single Docker command.
 
-Supports extending with tools like math reasoning, web search, and custom tasks.
+🔑 Environment variables – API keys and secrets are kept safe in .env.
 
-Can be adapted to include RAG (Retrieval Augmented Generation) for knowledge-based responses.
+📄 Future-ready – Can be extended to email results or add more tools.
 
-Optional Export (planned / future)
+⚙️ Project Flow
 
-Responses can be exported as PDF or Word documents.
+User enters a query
 
-Useful for reports, summaries, and documentation.
+LangChain Agent (GPT model) generates an intelligent response
 
-Email Delivery (future feature)
+Response is shown to the user
 
-Users can optionally choose to receive the AI’s response as a PDF/Word file sent to their email.
+Query + response is saved in PostgreSQL for history tracking
 
-Increases accessibility and convenience.
+(Optional future) Send the output as PDF/Word via email
 
-🛠️ Tech Stack
+🛠️ Setup
+1️⃣ Clone the repository
+git clone https://github.com/yourusername/ai_agent_with_tasks.git
+cd ai_agent_with_tasks
 
-Python (core language)
+2️⃣ Create & activate virtual environment
+python -m venv venv
+venv\Scripts\activate   # On Windows
+source venv/bin/activate  # On Mac/Linux
 
-LangChain (for LLM orchestration)
+3️⃣ Install dependencies
+pip install -r requirements.txt
 
-Autogen (for multi-agent workflows)
+4️⃣ Start PostgreSQL via Docker
+docker run --name ai_agent_db -e POSTGRES_USER=agent_user -e POSTGRES_PASSWORD=agent_pass -e POSTGRES_DB=agent_db -p 5432:5432 -d postgres
 
-PostgreSQL + Docker (for data storage & containerization)
+5️⃣ Set up environment variables
 
-OpenAI GPT API (for natural language processing)
+Create a .env file:
 
-📂 Future Enhancements
+OPENAI_API_KEY=your_api_key_here
+DATABASE_URL=postgresql://agent_user:agent_pass@localhost:5432/agent_db
 
-Add email integration with PDF/Word export.
 
-Build a UI dashboard for easier interaction.
+(Commit .env.example instead of real .env)
 
-Enable online search and retrieval (RAG) for up-to-date answers.
+6️⃣ Run the agent
+python agent.py
+
+📂 Repository Structure
+ai_agent_with_tasks/
+│-- agent.py            # Main agent logic
+│-- requirements.txt    # Python dependencies
+│-- .env.example        # Example env file
+│-- README.md           # Project documentation
+│-- .gitignore          # Ignore venv, env, cache files
+
+🔮 Future Improvements
+
+Add AutoEmail feature (send results as PDF/Word to user’s email).
+
+Integrate web search tools for real-time answers.
+
+Build a simple web UI (Flask/Streamlit).
